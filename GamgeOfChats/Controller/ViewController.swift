@@ -11,8 +11,6 @@ import Firebase
 import FirebaseDatabase
 
 class ViewController: UITableViewController {
-    
-    let ref = Database.database().reference(fromURL: "https://gameofchats-7f64f.firebaseio.com/ ")
 
     override func viewDidLoad() {
         super.viewDidLoad()

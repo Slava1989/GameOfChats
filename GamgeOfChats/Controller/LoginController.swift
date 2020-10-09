@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginController: UIViewController {
     
@@ -64,7 +65,7 @@ class LoginController: UIViewController {
         let tf = UITextField()
         tf.placeholder = "Password"
         tf.translatesAutoresizingMaskIntoConstraints = false
-        tf.isSecureTextEntry = true
+//        tf.isSecureTextEntry = true
         return tf
     }()
     
@@ -103,7 +104,38 @@ class LoginController: UIViewController {
     }
     
     @objc func handleRegisterLoginTap() {
+        guard let email = emailTextField.text,
+            let password = passwordTextField.text,
+            let name = emailTextField.text
+        else {
+            return
+        }
         
+        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+            if error != nil {
+                print(error)
+                return
+            }
+            
+            let ref = Database.database().reference(fromURL: "https://gameofchats-7f64f.firebaseio.com/ ")
+            let values = [
+                "name": name,
+                "email": email
+            ]
+            
+            ref.updateChildValues(values) { (err, ref) in
+                if err != nil {
+                    print(err?.localizedDescription)
+                    return
+                }
+                
+                print("Saved user successfully")
+            }
+            
+            if let user = result?.user {
+                print(user)
+            }
+        }
     }
     
     private func setupProfileImageView() {
