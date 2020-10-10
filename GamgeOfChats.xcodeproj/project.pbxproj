@@ -3,14 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		694E4D3B90198AFB04D32A1F /* Pods_GamgeOfChats.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77A1C7EBB3808FC53175DA38 /* Pods_GamgeOfChats.framework */; };
+		BA455A6025319CDA00DA1781 /* NewMessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA455A5F25319CDA00DA1781 /* NewMessageTableViewController.swift */; };
+		BA455A632531A21100DA1781 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA455A622531A21100DA1781 /* User.swift */; };
 		BA575B652530C14400BE391A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA575B642530C14400BE391A /* AppDelegate.swift */; };
 		BA575B672530C14400BE391A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA575B662530C14400BE391A /* SceneDelegate.swift */; };
-		BA575B692530C14400BE391A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA575B682530C14400BE391A /* ViewController.swift */; };
+		BA575B692530C14400BE391A /* MessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA575B682530C14400BE391A /* MessagesController.swift */; };
 		BA575B6C2530C14400BE391A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA575B6A2530C14400BE391A /* Main.storyboard */; };
 		BA575B6E2530C14600BE391A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA575B6D2530C14600BE391A /* Assets.xcassets */; };
 		BA575B712530C14600BE391A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA575B6F2530C14600BE391A /* LaunchScreen.storyboard */; };
@@ -22,10 +24,12 @@
 		127A9EF61E26A1A2E1F70A0E /* Pods-GamgeOfChats.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GamgeOfChats.debug.xcconfig"; path = "Target Support Files/Pods-GamgeOfChats/Pods-GamgeOfChats.debug.xcconfig"; sourceTree = "<group>"; };
 		31CE8763C894C9089B078903 /* Pods-GamgeOfChats.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GamgeOfChats.release.xcconfig"; path = "Target Support Files/Pods-GamgeOfChats/Pods-GamgeOfChats.release.xcconfig"; sourceTree = "<group>"; };
 		77A1C7EBB3808FC53175DA38 /* Pods_GamgeOfChats.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GamgeOfChats.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA455A5F25319CDA00DA1781 /* NewMessageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageTableViewController.swift; sourceTree = "<group>"; };
+		BA455A622531A21100DA1781 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BA575B612530C14400BE391A /* GamgeOfChats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GamgeOfChats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA575B642530C14400BE391A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA575B662530C14400BE391A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BA575B682530C14400BE391A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BA575B682530C14400BE391A /* MessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesController.swift; sourceTree = "<group>"; };
 		BA575B6B2530C14400BE391A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BA575B6D2530C14600BE391A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA575B702530C14600BE391A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -60,8 +64,15 @@
 				127A9EF61E26A1A2E1F70A0E /* Pods-GamgeOfChats.debug.xcconfig */,
 				31CE8763C894C9089B078903 /* Pods-GamgeOfChats.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		BA455A612531A20600DA1781 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BA455A622531A21100DA1781 /* User.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		BA575B582530C14400BE391A = {
@@ -85,6 +96,7 @@
 		BA575B632530C14400BE391A /* GamgeOfChats */ = {
 			isa = PBXGroup;
 			children = (
+				BA455A612531A20600DA1781 /* Model */,
 				BAB64BA72530DD4800235A86 /* GoogleService-Info.plist */,
 				BA575B782530C33000BE391A /* Controller */,
 				BA575B642530C14400BE391A /* AppDelegate.swift */,
@@ -100,8 +112,9 @@
 		BA575B782530C33000BE391A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				BA575B682530C14400BE391A /* ViewController.swift */,
+				BA575B682530C14400BE391A /* MessagesController.swift */,
 				BA575B792530C34800BE391A /* LoginController.swift */,
+				BA455A5F25319CDA00DA1781 /* NewMessageTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -223,9 +236,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA575B7A2530C34800BE391A /* LoginController.swift in Sources */,
-				BA575B692530C14400BE391A /* ViewController.swift in Sources */,
+				BA575B692530C14400BE391A /* MessagesController.swift in Sources */,
+				BA455A632531A21100DA1781 /* User.swift in Sources */,
 				BA575B652530C14400BE391A /* AppDelegate.swift in Sources */,
 				BA575B672530C14400BE391A /* SceneDelegate.swift in Sources */,
+				BA455A6025319CDA00DA1781 /* NewMessageTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
