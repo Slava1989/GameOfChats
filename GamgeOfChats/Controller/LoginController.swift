@@ -11,6 +11,8 @@ import Firebase
 
 class LoginController: UIViewController {
     
+    var messagesController: MessagesController?
+    
     private lazy var inputsContainerVew: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.white
@@ -32,7 +34,7 @@ class LoginController: UIViewController {
         return button
     }()
     
-    private lazy var nameTextField: UITextField = {
+    public lazy var nameTextField: UITextField = {
         let tf = UITextField()
         tf.placeholder = "Name"
         tf.translatesAutoresizingMaskIntoConstraints = false
@@ -46,7 +48,7 @@ class LoginController: UIViewController {
         return view
     }()
     
-    private lazy var emailTextField: UITextField = {
+    public lazy var emailTextField: UITextField = {
         let tf = UITextField()
         tf.placeholder = "Email"
         tf.translatesAutoresizingMaskIntoConstraints = false
@@ -61,7 +63,7 @@ class LoginController: UIViewController {
         return view
     }()
     
-    private lazy var passwordTextField: UITextField = {
+    public lazy var passwordTextField: UITextField = {
         let tf = UITextField()
         tf.placeholder = "Password"
         tf.translatesAutoresizingMaskIntoConstraints = false
@@ -76,11 +78,13 @@ class LoginController: UIViewController {
         return view
     }()
     
-    private lazy var profileImageView: UIImageView = {
+    public lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "wic")
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectProfileImageView)))
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
     
@@ -109,8 +113,6 @@ class LoginController: UIViewController {
         passwordTextFieldHeightAnchor?.isActive = false
         passwordTextFieldHeightAnchor = passwordTextField.heightAnchor.constraint(equalTo: inputsContainerVew.heightAnchor, multiplier: loginRegisterSegmentCotrol.selectedSegmentIndex == 0 ? 1/2 : 1 / 3)
         passwordTextFieldHeightAnchor?.isActive = true
-        
-        
     }
     
     override func viewDidLoad() {
@@ -144,60 +146,16 @@ class LoginController: UIViewController {
                 print(error?.localizedDescription)
             }
             
+            self.messagesController?.fetchUserAndSetupNavBarTitle()
+            
             self.dismiss(animated: true, completion: nil)
-        }
-    }
-    
-    func handleRegister() {
-        guard let email = emailTextField.text,
-            let password = passwordTextField.text,
-            let name = nameTextField.text
-            else {
-                return
-        }
-        
-        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
-            if error != nil {
-                print(error)
-                return
-            }
-            
-            let user = result?.user
-            guard let userUID = user?.uid else {
-                return
-            }
-            
-            let ref = Database.database().reference(fromURL: "https://gameofchats-7f64f.firebaseio.com/")
-            
-            let userReference = ref.child("users").child(userUID)
-            let values = [
-                "name": name,
-                "email": email
-            ]
-            
-            userReference.updateChildValues(values) { [weak self] (err, ref) in
-                guard let self = self else { return }
-                
-                if err != nil {
-                    print(err?.localizedDescription)
-                    return
-                }
-                
-                self.dismiss(animated: true, completion: nil)
-                
-                print("Saved user successfully")
-            }
-            
-            if let user = result?.user {
-                print(user)
-            }
         }
     }
     
     @objc func handleRegisterLoginTap() {
         if loginRegisterSegmentCotrol.selectedSegmentIndex == 0 {
             handleLogin()
-        } else {
+        } else {        
             handleRegister()
         }
     }
